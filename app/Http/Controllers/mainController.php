@@ -14,14 +14,24 @@ class mainController extends Controller
         return view("register");
     }
     public function register(Request $request){
-        $customer=new Admin;
-        $customer->name=$request['name'];
-        $customer->id=$request['id'];
-        $customer->email=$request['email'];
-        $customer->contact_no=$request['contact_no'];
-        $customer->address=$request['address'];
-        $customer->password=$request['password'];
-        $customer->save();
+        $admin=new Admin;
+        $admin->name=$request['name'];
+        $admin->id=$request['id'];
+        $admin->email=$request['email'];
+        $admin->contact_no=$request['contact_no'];
+        $admin->address=$request['address'];
+        $admin->password=$request['password'];
+        $admin->save();
         return redirect('/');
+    }
+    public function login_form(){
+        return view("login");
+    }
+    public function login(Request $request){
+        $validated=$request->validate([
+            "id"=>"required",
+            "password"=>"required"
+        ]);
+        dd($validated);
     }
 }

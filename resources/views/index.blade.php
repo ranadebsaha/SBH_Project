@@ -19,8 +19,8 @@
                 <li class="ml-5">Contact Us</li>
             </ul>
             <div class="nav-button">
-                <a class="bg-black text-white p-2" href="{{}}">Log In</a>
-                <button class="ml-2 bg-black text-white p-2" href="{{url('/register')}}">Sign Up</button>
+                <a class="bg-black text-white p-2" href="{{url('/login')}}">Log In</a>
+                <a class="ml-2 bg-black text-white p-2" href="{{url('/register')}}">Sign Up</a>
             </div>
         </nav>
         <div class="hero flex px-16 pt-5 w-full h-1/2">
@@ -28,8 +28,8 @@
                 <h1 class="text-7xl font-bold">Lorem ipsum dolor sit amet.</h1>
                 <p class="pt-5 text-2xl">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae obcaecati assumenda dolore ipsa laborum nesciunt iste reiciendis in eum laboriosam?</p>
                 <div class="pt-5">
-                    <button class="bg-black text-white p-2">Log In</button>
-                    <button class="ml-2 bg-black text-white p-2">Sign Up</button>
+                    <a class="bg-black text-white p-2" href="{{url('/login')}}">Log In</button>
+                    <a class="ml-2 bg-black text-white p-2" href="{{url('/register')}}">Sign Up</a>
                 </div>
             </div>
             <img class="h-full" src="https://astroship.web3templates.com/_astro/hero.6fdd0dc6_Z2mbqjy.webp" alt="">

@@ -18,15 +18,24 @@
                     <form method="post" action="{{url('/')}}/login">
                     @csrf
                         <div class="form-group">
-                            <label for="loginEmail">Email address</label>
-                            <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <label for="loginid">Institute Id</label>
+                            <input type="text" name="id" class="form-control" id="loginid" placeholder="Enter institute id">
+                        @error('id')
+                        <span class="text-danger">
+                            {{ $message }}
+                        </span>
+                        
+                        @enderror
                         </div>
                         <div class="form-group">
                             <label for="loginPassword">Password</label>
-                            <input type="password" class="form-control" name="password"  id="loginPassword" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password"  id="loginPassword" placeholder="Password">
+                            @error('id')
+                        {{ $message }}
+                        @enderror
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        <p class="toggle-form">Don't have an account? <a href="#" onclick="toggleForm()">Register</a></p>
+                        <p class="toggle-form">Don't have an account? <a href="{{url('/register')}}">Register</a></p>
                     </form>
                 </div>
             </div>

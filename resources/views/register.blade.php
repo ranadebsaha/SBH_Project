@@ -15,7 +15,7 @@
             <div class="col-md-6 offset-md-3">
                 <div class="form-container" id="registrationForm">
                     <h2 class="text-center">Registration Form</h2>
-                    <form method="post" action="{{url('/advocate_register')}}">
+                    <form method="post" action="{{url('/register')}}">
                     @csrf
                         <div class="form-group">
                             <label for="registerName">Institute Full Fame</label>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="register">Institute Address</label>
-                                <input type="text" name="address" class="form-control" id="registerEmail" aria-describedby="emailHelp"
+                                <input type="text" name="id" class="form-control" id="registerEmail" aria-describedby="emailHelp"
                                     placeholder="Enter address" required>
                             </div>
                         <div class="form-group">
@@ -48,6 +48,7 @@
                                 required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <p class="toggle-form">Already have an account? <a href="{{url('/login')}}">Login</a></p>
                     </form>
                 </div>
             </div>
