@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class mainController extends Controller
 {
@@ -32,6 +33,10 @@ class mainController extends Controller
             "id"=>"required",
             "password"=>"required"
         ]);
-        dd($validated);
+        if(Auth::attempt($validated)){
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        }
+        echo "Invalid Institute Id or Password";
     }
 }

@@ -22,7 +22,7 @@
                             <input type="text" name="id" class="form-control" id="loginid" placeholder="Enter institute id">
                         @error('id')
                         <span class="text-danger">
-                            {{ $message }}
+                            *{{ $message }}
                         </span>
                         
                         @enderror
@@ -30,8 +30,10 @@
                         <div class="form-group">
                             <label for="loginPassword">Password</label>
                             <input type="password" class="form-control" name="password"  id="loginPassword" placeholder="Password">
-                            @error('id')
-                        {{ $message }}
+                            @error('password')
+                            <span class="text-danger">
+                            *{{ $message }}
+                        </span>
                         @enderror
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
