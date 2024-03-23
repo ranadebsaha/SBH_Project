@@ -11,7 +11,7 @@
 <body>
     <div id="main">
         <nav class="flex justify-between px-16 py-5 w-full">
-            <h1 class="">LOGO</h1>
+            <h1 class="">CR</h1>
             <ul class="flex">
                 <li>Home</li>
                 <li class="ml-5">Features</li>
