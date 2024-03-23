@@ -5,4 +5,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[mainController::class,'index']);
 Route::get('/register',[mainController::class,'register_form']);
-// Route::get('/',[mainController::class,'index']);
+Route::post('/register',[mainController::class,'register']);
