@@ -19,8 +19,8 @@
                 <li class="ml-5">Contact Us</li>
             </ul>
             <div class="nav-button">
-                <button class="bg-black text-white p-2">Log In</button>
-                <button class="ml-2 bg-black text-white p-2">Sign Up</button>
+                <a class="bg-black text-white p-2" href="{{}}">Log In</a>
+                <button class="ml-2 bg-black text-white p-2" href="{{url('/register')}}">Sign Up</button>
             </div>
         </nav>
         <div class="hero flex px-16 pt-5 w-full h-1/2">
@@ -75,7 +75,7 @@
     </div>
     <footer class="bg-black text-white px-16 mt-5 h-auto">
         <div class="flex justify-between">
-            <h1 class="mt-5 text-4xl">LOGO</h1>
+            <h1 class="mt-5 text-4xl">CR</h1>
             <div class="border-white border-l-[1px] my-5">
                 <p class="pl-5 text-xl">Follow us</p>
                 <p class="pl-5 text-xl">lorem</p>

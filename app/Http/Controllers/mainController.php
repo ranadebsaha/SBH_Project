@@ -9,4 +9,7 @@ class mainController extends Controller
     public function index(){
         return view("index");
     }
+    public function register_form(){
+        return view("register");
+    }
 }
