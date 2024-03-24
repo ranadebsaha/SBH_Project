@@ -6,6 +6,8 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Auth;
 use Auth;
+use Hash;
+use Session;
 
 class mainController extends Controller
 {
@@ -30,7 +32,7 @@ class mainController extends Controller
         $admin->email=$request['email'];
         $admin->contact_no=$request['contact_no'];
         $admin->address=$request['address'];
-        $admin->password=$request['password'];
+        $admin->password=Hash::make($request['password']);
         $res=$admin->save();
         if($res){
             return redirect('/')->with('success','Registered Successfully Completed');
@@ -51,10 +53,21 @@ class mainController extends Controller
             "password"=>"required"
         ]);
         $admin= new Admin;
-            $admin_id=Admin::where('id','=','$id')->pluck('admin_id');
-            if(is_null($admin)){
-                return redirect('login')->with('error',"Invalid Institute ID");
-            }else{
+            $admin=Admin::where('id','=',$request->id)->first();
+            if($admin){
+                if(Hash::check($request->password,$admin->password)){
+                    $request->session()->put('id',$admin->id);
+                    return redirect('dashboard')->with('success',"Welcome");
+                }else{
+                    return redirect('login')->with('error',"Enter Valid Password");
+                }
+            }
+            else{
+                return redirect('login')->with('error',"This Email is not Registered");
+            }
+            // if(is_null($admin)){
+            //     return redirect('login')->with('error',"Invalid Institute ID");
+            // }else{
                 // $admin=Admin::where('email','=',$email)->get();
                 // $data1=compact('customer');
                 // $data=json_decode($customer,true);
@@ -65,6 +78,6 @@ class mainController extends Controller
                     // return view('customer_dashboard')->with($data1);
                 // }
                 
-            }
+            // }
     }
 }

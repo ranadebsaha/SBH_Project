@@ -29,7 +29,7 @@
                     @csrf
                         <div class="form-group">
                             <label for="loginid">Institute Id</label>
-                            <input type="text" name="id" class="form-control" id="loginid" placeholder="Enter institute id">
+                            <input type="text" value="{{old('id')}}" name="id" class="form-control" id="loginid" placeholder="Enter institute id">
                         @error('id')
                         <span class="text-danger">
                             *{{ $message }}
@@ -56,7 +56,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="" href="{{url('frontend/index.js')}}"></script>
+    <script src="" href="{{url('/frontend/index.js')}}"></script>
 </body>
 
 </html>

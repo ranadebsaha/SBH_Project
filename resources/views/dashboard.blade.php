@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     
-    <link rel="stylesheet" href="{{url('frontend/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('/frontend/css/style.css')}}">
   </head>
   <body>
     <div class="grid-container">
@@ -188,6 +188,6 @@
 
     </div>
 
-    <script src="js/scripts.js"></script>
+    <script src="{{url('/frontend/index.js')}}"></script>
   </body>
 </html>
