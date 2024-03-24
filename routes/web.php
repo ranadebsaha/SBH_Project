@@ -9,3 +9,4 @@ Route::post('/register',[mainController::class,'register']);
 Route::get('/login',[mainController::class,'login_form']);
 Route::post('/login',[mainController::class,'login']);
 Route::get('/dashboard',[mainController::class,'dashboard']);
+Route::get('/logout',[mainController::class,'logout']);

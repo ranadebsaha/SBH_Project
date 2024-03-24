@@ -70,12 +70,12 @@
           </li>
           <li class="sidebar-list-item">
             <a href="#">
-              <span class="material-icons-outlined">poll</span> Reports
+              <span class="material-icons-outlined">settings</span> Settings
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
-              <span class="material-icons-outlined">settings</span> Settings
+            <a href="{{url('/logout')}}">
+              <span class="material-icons-outlined">logout</span> Logout
             </a>
           </li>
         </ul>
@@ -96,6 +96,9 @@
                         {{Session::get('error')}}
                     </div>
                     @endif
+                    <div>
+                      Hello, {{$data->name}}
+                    </div>
         <div class="main-cards">
 
           <div class="card">

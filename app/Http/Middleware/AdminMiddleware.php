@@ -14,4 +14,11 @@ class AdminMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+    public function handle(Request $request, Closure $next): Response
+    {
+        if(!Session()->has('id')){
+            return redirect('login')->with('error', "Please Login First");
+        }
+        return $next($request);
+    }
 }
