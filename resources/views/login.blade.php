@@ -16,6 +16,16 @@
                 <div class="form-container" id="loginForm">
                     <h2 class="text-center">Institute Login</h2>
                     <form method="post" action="{{url('/')}}/login">
+                    @if(Session::has('success'))
+                    <div class="alert alert-success">
+                        {{Session::get('success')}}
+                    </div>
+                    @endif
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                    </div>
+                    @endif
                     @csrf
                         <div class="form-group">
                             <label for="loginid">Institute Id</label>

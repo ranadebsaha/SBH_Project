@@ -23,6 +23,16 @@
                 <a class="ml-2 bg-black text-white p-2" href="{{url('/register')}}">Sign Up</a>
             </div>
         </nav>
+        @if(Session::has('success'))
+                    <div class="alert alert-success">
+                        {{Session::get('success')}}
+                    </div>
+                    @endif
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                    </div>
+                    @endif
         <div class="hero flex px-16 pt-5 w-full h-1/2">
             <div class="w-7/12">
                 <h1 class="text-7xl font-bold">Lorem ipsum dolor sit amet.</h1>
