@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\mainController;
+use App\Http\Controllers\RoutineController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -12,3 +13,6 @@ Route::get('/login',[mainController::class,'login_form']);
 Route::post('/login',[mainController::class,'login']);
 Route::get('/dashboard',[mainController::class,'dashboard']);
 Route::get('/logout',[mainController::class,'logout']);
+
+//Routine Routes
+Route::get('/admin/details',[RoutineController::class,'details']);
