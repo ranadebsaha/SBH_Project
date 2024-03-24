@@ -23,7 +23,7 @@ class mainController extends Controller
     public function register_form()
     {
         if (Session::has('id')) {
-            return redirect()->back();
+            return redirect('dashboard');
         }
         else{
             return view("register");
@@ -89,7 +89,7 @@ class mainController extends Controller
             return view("dashboard",compact('data'));
         }
         else{
-            return view('login');
+            return redirect('login');
         }
     }
     public function logout(){

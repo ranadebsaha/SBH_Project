@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class GuestMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(Session()->has('id') && (url('login')==$request->url() || url('register')==$request->url())){
-        //     return redirect('dashboard');
+        // if(!Session()->has('id')){
+        //     return redirect('login')->with('error', "Please Login First");
         // }
         return $next($request);
     }
