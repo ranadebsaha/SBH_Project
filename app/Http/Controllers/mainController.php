@@ -14,10 +14,9 @@ class mainController extends Controller
     public function index()
     {
         if (Session::has('id')) {
-            return redirect()->back();
+            return redirect('dashboard');
         }
         else{
-            Session::pull('id');
         return view("index");
         }
     }
@@ -27,7 +26,6 @@ class mainController extends Controller
             return redirect()->back();
         }
         else{
-            Session::pull('id');
             return view("register");
         }
     }
@@ -58,11 +56,10 @@ class mainController extends Controller
     public function login_form()
     {
         if (Session::has('id')) {
-            return redirect()->back();
+            return redirect('dashboard');
         }
         else{
-            Session::pull('id');
-        return view("login");
+        return view('login');
         }
     }
     public function login(Request $request)
