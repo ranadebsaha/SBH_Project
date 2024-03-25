@@ -10,13 +10,14 @@ class RoutineController extends Controller
         return view('Routine/form');
     }
     public function details_save(Request $request){
-        $request->validate([
+        $data=$request->validate([
             'classroom'=>'required',
             'class_start'=>'required',
             'class_close'=>'required',
             'break_time'=>'required',
             'weekend'=>'required',
-            'class_start'=>'required'
+            'class_time'=>'required'
         ]);
+        dd($data);
     }
 }
