@@ -39,4 +39,27 @@ class RoutineController extends Controller
     public function pre(){
         return view('Routine/pre');
     }
+    public function pre_save(Request $request){
+        $request->validate([
+            'class'=>'required',
+            'class_no'=>'required'
+        ]);
+        $routine_id=$request->session()->get('id').date('Y').strtolower($request['class']);
+        $request->session()->put('class_no', $request['class_no']);
+        $request->session()->put('class', $routine_id);
+        return redirect('/admin/routine/data');
+    }
+    public function data(){
+        return view('Routine/data');
+    }
+    public function data_save(Request $request){
+        for($i=1;$i<=Session::get('class_no');$i++){
+            $sub='subject'.$i;
+            $tec='teacher'.$i;
+            $request->validate([
+                $sub=>'required',
+                $tec=>'required'
+            ]);
+        }
+    }
 }

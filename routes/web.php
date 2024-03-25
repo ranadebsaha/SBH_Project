@@ -19,3 +19,6 @@ Route::get('/logout',[mainController::class,'logout']);
 Route::get('/admin/details',[RoutineController::class,'details']);
 Route::post('/details',[RoutineController::class,'details_save']);
 Route::get('/admin/routine',[RoutineController::class,'pre']);
+Route::post('/admin/routine/save',[RoutineController::class,'pre_save']);
+Route::get('/admin/routine/data',[RoutineController::class,'data']);
+Route::post('/admin/data',[RoutineController::class,'data_save']);
