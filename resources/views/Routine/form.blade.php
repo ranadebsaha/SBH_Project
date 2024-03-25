@@ -20,8 +20,8 @@
                     @csrf
                         <div class="form-group">
                             <label for="registerName">Total Number Of Classroom (Ex:- 10)</label>
-                            <input type="number" name="classroom" value="{{old('room')}}" class="form-control" id="registerName" placeholder="Enter name">
-                            @error('room')
+                            <input type="text" name="classroom" value="{{old('classroom')}}" class="form-control" id="registerName" placeholder="Enter name">
+                            @error('classroom')
                         <span class="text-danger">
                             *{{ $message }}
                         </span>
@@ -104,15 +104,15 @@
                     </div>
                         <div class="form-group">
                             <label for="registerEmail">Per class time in minute</label>
-                            <input type="number" name="class_time" class="form-control" value="{{old('email')}}" id="registerEmail" aria-describedby="emailHelp"
+                            <input type="number" name="class_time" class="form-control" value="{{old('class_time')}}" id="registerEmail" aria-describedby="emailHelp"
                                 placeholder="Enter email">
-                                @error('email')
+                                @error('class_time')
                         <span class="text-danger">
                             *{{ $message }}
                         </span>
                         @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
                     </form>
                 </div>
             <!-- </div>

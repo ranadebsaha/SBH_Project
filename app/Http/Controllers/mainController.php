@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Details;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Auth;
 use Auth;
@@ -40,14 +41,17 @@ class mainController extends Controller
             "password" => "required|min:3|max:12"
         ]);
         $admin = new Admin;
+        $details= new Details;
         $admin->name = $request['name'];
         $admin->id = $request['id'];
         $admin->email = $request['email'];
         $admin->contact_no = $request['contact_no'];
         $admin->address = $request['address'];
         $admin->password = Hash::make($request['password']);
+        $details->institute_id=$request['id'];
         $res = $admin->save();
-        if ($res) {
+        $res1 = $details->save();
+        if ($res && $res1) {
             return redirect('/')->with('success', 'Registered Successfully Completed');
         } else {
             return redirect('register')->with('error', "Something Wrong");

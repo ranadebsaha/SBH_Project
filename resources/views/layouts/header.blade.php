@@ -44,7 +44,7 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="">
+            <a href="{{url('dashboard')}}">
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
@@ -54,8 +54,8 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="">
-              <span class="material-icons-outlined">forum</span> Forum
+            <a href="{{url('/admin/routine')}}">
+              <span class="material-icons-outlined">forum</span> Create a Routine
             </a>
           </li>
           <li class="sidebar-list-item">

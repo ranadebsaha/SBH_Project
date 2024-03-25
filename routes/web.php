@@ -6,6 +6,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use Illuminate\Support\Facades\Route;
 
+//Auth Routes
 Route::get('/',[mainController::class,'index']);
 Route::get('/register',[mainController::class,'register_form']);
 Route::post('/register',[mainController::class,'register']);
@@ -17,3 +18,4 @@ Route::get('/logout',[mainController::class,'logout']);
 //Routine Routes
 Route::get('/admin/details',[RoutineController::class,'details']);
 Route::post('/details',[RoutineController::class,'details_save']);
+Route::get('/admin/routine',[RoutineController::class,'pre']);
