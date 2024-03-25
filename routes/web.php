@@ -16,3 +16,4 @@ Route::get('/logout',[mainController::class,'logout']);
 
 //Routine Routes
 Route::get('/admin/details',[RoutineController::class,'details']);
+Route::post('/admin/details',[RoutineController::class,'details_save']);
