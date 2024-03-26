@@ -71,11 +71,13 @@ class RoutineController extends Controller
         $max_class = $request->validate([
             "max_class_teacher" => 'required',
             "max_class_week" => 'required',
+            "max_class_day" => 'required',
             "break_time_start" => 'required'
         ]);
-
+        // $temp2 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('routine_id','=','kdiit123')->get();
+        // $temp2=json_decode($temp2);
         // $temp=json_decode($temp);
-        // dd($temp);
+        // dd($temp2);
         //Algorithm of Routine
         $routine_id = $request->session()->get('routine_id');
         $class_no = $request->session()->get('class_no');
@@ -90,6 +92,7 @@ class RoutineController extends Controller
         $max_class_teacher = $request['max_class_teacher'];
         $max_class_week = $request['max_class_week'];
         $break_time_start = $request['break_time_start'];
+        $max_class_day = $request['max_class_day'];
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         // dd($weekend);
         
@@ -100,22 +103,80 @@ class RoutineController extends Controller
                     $st = 1;
                 }
             }
+            //weekwnd check
             if($st==1){
-                continue;
+                break;
             }
+            for($d=0;$d<$max_class_day;$i++){
+            //check class timing
             if ($class_start + $class_time <= $class_close && ($class_start + $break_time <= $break_time_start || $class_start>=$break_time_start+$break_time)) {
-            for ($i = 0; $i < $class_no; $i++) {
+            for ($i = 1; $i <= $class_no; $i++) {
                 $teacher='teacher_'.$i+1;
                     $temp = Routine::where('institute_id', '=', Session::get('id'))->where('day', '=', $day)->where($teacher, '=', $data[$teacher])->where('status', '=', '1')->get();
                     $temp=json_decode($temp);
+                    //check teacher free or not in this time slot
                     if (is_null($temp)) {
+                        $temp2 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('routine_id','=',$routine_id)->get();
+                        $temp2=json_decode($temp2);
+                        $sub=0;
+                        foreach($temp2 as $r){
+                                for ($j = 1; $j <=$max_class_day; $j++){
+                                if($r['subject_'.$j]==$data['subject_'.$i]){
+                                    $sub=$sub+1;
+                                    continue;
+                                }  
+                            }
+                        }
+                        //check the class limit of this subject is over or not
+                        if($sub<$max_class_week){
+                            $temp3 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('day','=',$day)->get();
+                            $temp3=json_decode($temp3);
+                            $tch=0;
+                            foreach($temp3 as $r){
+                                    for ($j = 1; $j <=$max_class_day; $j++){
+                                    if($r['teacher_'.$j]==$data['teacher_'.$i]){
+                                        $tch=$tch+1;
+                                        continue;
+                                    }  
+                                }
+                            }
+                            //check the class limit of teacher is over or not
+                            if($tch<$max_class_teacher){
+                                $temp4 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('routine_id','=',$routine_id)->where('day','=',$day)->get();
+                                $temp4=json_decode($temp4);
+                                $dsub=0;
+                                for ($j = 1; $j <=$max_class_day; $j++){ 
+                                if($temp4['subject_'.$j]==$data['subject_'.$i]){
+                                    $dsub=1;
+                                    break;
+                                }
+                            }
+                            //check the subject is first on this day or not
+                            if($dsub==0){
+                                //store routine into the database
+                                $newsub='subject_'.$d+1;
+                                $newtch='teacher_'.$d+1;
+                                $newtime='timing_'.$d+1;
+                                $routine=New Routine;
+                                $routine->$newsub = $data['subject_'.$i];
+                                $routine->$newtch=$data['teacher_'.$i];
+                                $routine->$newtime=$class_start;
+                                //change time
+                                $class_start=strtotime($class_start)-strtotime('TODAY');
+                                $class_time=$class_time*60;
+                                $class_start=$class_start+$class_time;
+                                $hrs=$class_start/60;
+                                $mins=$hrs%60;
+                                $hrs=$hrs/60;
+                                $class_start=(int)$hrs.":".$mins;
+                            }  
+                            }
                         
-                        $temp2 = Routine::where('institute_id', '=', Session::get('id'))->where('day', '=', $day)->where($teacher, '=', $data[$teacher])->where('status', '=', '1')->get();
-                    }else{
-                        continue;
                     }
                 }
             }
         }
     }
+    }
+}
 }
