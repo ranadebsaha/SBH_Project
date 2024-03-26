@@ -17,11 +17,14 @@
                         {{Session::get('error')}}
                     </div>
                     @endif
+
                     @if($errors->any())
                         <ul>
+                        <span class="text-danger">
                             @foreach($errors->all() as $error)
                                 <li>{{$error}}</li>
                             @endforeach
+</span>
                         </ul>
                     @endif
                     <i>Enter Subject name and its Corresponding teacher name</i>
@@ -30,8 +33,8 @@
 
                     <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Subject-{{$i+1}} Name</label>
-                    <input type="text" name="subject{{$i+1}}" class="form-control" id="inputEmail4">
-                    @error('subject{{$i+1}}')
+                    <input type="text" name="subject_{{$i+1}}" value="{{old('subject_'.$i+1)}}" class="form-control" id="inputEmail4">
+                    @error('subject_.{{$i+1}}')
                         <span class="text-danger">
                             *{{ $message }}
                         </span>
@@ -39,15 +42,26 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Teacher-{{$i+1}} Name</label>
-                        <input type="text" name="teacher{{$i+1}}" class="form-control" id="inputPassword4">
-                        @error('teacher{{$i+1}}')
+                        <input type="text" name="teacher_{{$i+1}}" value="{{old('teacher_'.$i+1)}}" class="form-control" id="inputPassword4">
+                        @error('teacher_.{{$i+1}}')
                         <span class="text-danger">
                             *{{ $message }}
                         </span>
                         @enderror
                     </div>
-
                         @endfor
+                        <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">Maximum number of Class taken by one teacher per day</label>
+                        <input type="number" name="max_class_teacher" value="{{old('max_class_teacher')}}" class="form-control" id="inputPassword4">
+                    </div>
+                        <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">Maximum number of classes in One Subject per Week</label>
+                        <input type="time" name="max_class_week" value="{{old('max_class_week')}}" class="form-control" id="inputPassword4">
+                    </div>
+                        <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">Break Time Starts</label>
+                        <input type="time" name="break_time_start" value="{{old('break_time_start')}}" class="form-control" id="inputPassword4">
+                    </div>
                         <button type="submit" class="btn btn-primary btn-block">Save</button>
                     </form>
                 </div>
