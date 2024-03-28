@@ -97,7 +97,7 @@ class RoutineController extends Controller
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         foreach ($days as $day) {
             $st = 0;
-            foreach ($days as $w) {
+            foreach ($weekend as $w) {
                 if ($day == $w) {
                     $st = 1;
                 }
