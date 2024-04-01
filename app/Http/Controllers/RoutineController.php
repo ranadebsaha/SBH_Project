@@ -68,7 +68,7 @@ class RoutineController extends Controller
                 $tec => 'required'
             ]);
         }
-        $max_class = $request->validate([
+        $request->validate([
             "max_class_teacher" => 'required',
             "max_class_week" => 'required',
             "max_class_day" => 'required',
@@ -96,7 +96,7 @@ class RoutineController extends Controller
         $max_class_day = $request['max_class_day'];
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         //change the time hours:minute to seconds
-        $class_start = strtotime($class_start) - strtotime('TODAY');
+        $class_start_r = strtotime($class_start) - strtotime('TODAY');
         $class_close = strtotime($class_close) - strtotime('TODAY');
         $break_time_start = strtotime($break_time_start) - strtotime('TODAY');
         $class_time = $class_time * 60;
@@ -113,20 +113,18 @@ class RoutineController extends Controller
             if ($st == 1) {
                 continue;
             }
-            // dd($weekend);
+            $class_start=$class_start_r;
             $routine = new Routine;
             //store status, routine and institute id
             $routine->status = 1;
             $routine->routine_id = $routine_id;
             $routine->institute_id = Session::get('id');
-            $clroom = Routine::where('institute_id', '=', Session::get('id'))->where('routine_id', '=', $routine_id)->where('status', '=', '1')->first();
+            $clroom = Routine::where('institute_id', '=', $institute_id)->where('routine_id', '=', $routine_id)->where('status', '=', '1')->first();
             $clroom = json_decode($clroom);
                 //classroom allocate
                 if (is_null($clroom)) {
-                    
                     $clroom1 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->get();
                     $clroom1 = json_decode($clroom1);
-                    
                     if (empty($clroom1)) {
                     $routine->classroom_no = 1;
                 } else {
@@ -163,14 +161,18 @@ class RoutineController extends Controller
                     $class_start = strtotime($class_start) - strtotime('TODAY');
                     $class_start = $class_start + $break_time;
                 }
-                //check class timing
+                // check class timing
                 if (($class_start + $class_time) <= $class_close) {
-                    for ($i = 1; $i <= $class_no; $i++) {
+                    $store_data_r=0;
+                            for ($i = 1; $i <= $class_no; $i++) {
+                                if($store_data_r==1){
+                                    break;
+                                }
                         $teacher = 'teacher_' . $i;
-                        $temp = Routine::where('institute_id', '=', Session::get('id'))->where('day', '=', $day)->where($teacher, '=', $data[$i - 1][$teacher])->where('status', '=', '1')->get();
+                        $temp = Routine::where('institute_id', '=', Session::get('id'))->where('day', '=', $day)->where($teacher, '=', $data[$i - 1][$teacher])->where('status', '=', '1')->first();
                         $temp = json_decode($temp);
                         //check teacher free or not in this time slot
-                        if (empty ($temp)) {
+                        if (is_null($temp)) {
                             $temp2 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('routine_id', '=', $routine_id)->get();
                             $temp2 = json_decode($temp2);
                             $sub = 0;
@@ -180,9 +182,8 @@ class RoutineController extends Controller
                                 foreach ($temp2 as $r) {
                                     for ($j = 1; $j <= $max_class_day; $j++) {
                                         $sub1 = 'subject_' . $j;
-                                        if ($r->$sub1 == $data[$i - 1]['subject_' . $i]) {
+                                        if ($data[$i - 1]['subject_' . $i] == $r->$sub1) {
                                             $sub = $sub + 1;
-
                                             continue;
                                         }
 
@@ -240,7 +241,9 @@ class RoutineController extends Controller
                                         $routine->$newsub = $data[$i - 1]['subject_' . $i];
                                         $routine->$newtch = $data[$i - 1]['teacher_' . $i];
                                         $routine->$newtime = $class_start;
+                                        $store_data_r=1;
 
+                                        echo $day;
                                         echo $data[$i - 1]['subject_' . $i];
                                         echo $data[$i - 1]['teacher_' . $i];
                                         echo $class_start;
@@ -255,8 +258,8 @@ class RoutineController extends Controller
                         }
                     }
                 }
+                // $routine->save();
             }
-            // $routine->save();
             // if ($res) {
             //     return redirect('dashboard')->with('success', 'Routine Successfully Generated');
             // } else {
