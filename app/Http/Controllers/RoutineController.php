@@ -22,7 +22,10 @@ class RoutineController extends Controller
             'class_close' => 'required',
             'break_time' => 'required',
             'weekend' => 'required',
-            'class_time' => 'required'
+            'class_time' => 'required',
+            "max_class_teacher" => 'required',
+            "break_time_start" => 'required',
+            "break_time_end" => 'required'
         ]);
         $admin = Details::where('institute_id', '=', Session::get('id'))->first();
         $details = Details::find($admin->id);
@@ -32,6 +35,9 @@ class RoutineController extends Controller
         $details->break_time = $request['break_time'];
         $details->weekend = json_encode($request->weekend);
         $details->class_time = $request['class_time'];
+        $details->max_class_teacher = $request['max_class_teacher'];
+        $details->break_time_start = $request['break_time_start'];
+        $details->break_time_end = $request['break_time_end'];
         $res = $details->save();
         if ($res) {
             return redirect('admin/details')->with('success', 'Registered Successfully Completed');
@@ -69,15 +75,9 @@ class RoutineController extends Controller
             ]);
         }
         $request->validate([
-            "max_class_teacher" => 'required',
             "max_class_week" => 'required',
-            "max_class_day" => 'required',
-            "break_time_start" => 'required'
+            "max_class_day" => 'required'
         ]);
-        // $temp2 = Routine::where('institute_id', '=', Session::get('id'))->where('status', '=', '1')->where('routine_id','=','kdiit123')->get();
-        // $temp2=json_decode($temp2);
-        // $temp=json_decode($temp);
-        // dd($temp2);
         //Algorithm of Routine
         $routine_id = $request->session()->get('routine_id');
         $class_no = $request->session()->get('class_no');
@@ -90,15 +90,17 @@ class RoutineController extends Controller
         $class_time = $details->class_time;
         $classroom = $details->classroom;
         $weekend = json_decode($details->weekend);
-        $max_class_teacher = $request['max_class_teacher'];
+        $max_class_teacher = $details->max_class_teacher;
+        $break_time_start = $details->break_time_start;
+        $break_time_end = $details->break_time_end;
         $max_class_week = $request['max_class_week'];
-        $break_time_start = $request['break_time_start'];
         $max_class_day = $request['max_class_day'];
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
         //change the time hours:minute to seconds
         $class_start_r = strtotime($class_start) - strtotime('TODAY');
         $class_close = strtotime($class_close) - strtotime('TODAY');
         $break_time_start = strtotime($break_time_start) - strtotime('TODAY');
+        $break_time_end = strtotime($break_time_end) - strtotime('TODAY');
         $class_time = $class_time * 60;
         $break_time = $break_time * 60;
         foreach ($days as $day) {
@@ -164,7 +166,7 @@ class RoutineController extends Controller
             $routine = Routine::where('institute_id', '=', $institute_id)->where('routine_id', '=', $routine_id)->where('status', '=', '1')->where('day','=',$day)->first();;
             for ($d = 0; $d < $max_class_day; $d++) {
                 //check break timing
-                if ($class_start >= '46800' && $class_start <= '49000') {
+                if ($class_start >= $break_time_start && $class_start <= $break_time_end) {
                     $hrs = $class_start / 60;
                     $mins = $hrs % 60;
                     $hrs = $hrs / 60;
@@ -273,13 +275,19 @@ class RoutineController extends Controller
                     }
                 }
             }
-            // if ($res) {
-            //     return redirect('dashboard')->with('success', 'Routine Successfully Generated');
-            // } else {
-            //     return redirect('/admin/routine/data')->with('error', 'Something Error');
-            // }
+            if ($res) {
+                return redirect('dashboard')->with('success', 'Routine Successfully Generated');
+            } else {
+                return redirect('/admin/routine/data')->with('error', 'Something Error');
+            }
         }
 
 
+    }
+    public function routine_view_admin(){
+        $details = Routine::where('institute_id', '=', Session::get('id'))->get();
+        if(empty($details)){
+            
+        }
     }
 }

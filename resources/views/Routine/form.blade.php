@@ -112,6 +112,23 @@
                         </span>
                         @enderror
                         </div>
+                        <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">Maximum number of Classes taken by one teacher in a day</label>
+                        <input type="number" name="max_class_teacher" value="{{old('max_class_teacher')}}" class="form-control" id="inputPassword4">
+                        @error('max_class_teacher')
+                        <span class="text-danger">
+                            *{{ $message }}
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">Break Time Starts in Between</label>
+                        <input type="time" name="break_time_start" value="{{old('break_time_start')}}" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="inputPassword4" class="form-label">to</label>
+                        <input type="time" name="break_time_end" value="{{old('break_time_end')}}" class="form-control" id="inputPassword4">
+                    </div>
                         <button type="submit" class="btn btn-primary btn-block">Save</button>
                     </form>
                 </div>

@@ -50,10 +50,7 @@
                         @enderror
                     </div>
                         @endfor
-                        <div class="col-md-8">
-                        <label for="inputPassword4" class="form-label">Maximum number of Classes taken by one teacher in a day</label>
-                        <input type="number" name="max_class_teacher" value="{{old('max_class_teacher')}}" class="form-control" id="inputPassword4">
-                    </div>
+                        
                         <div class="col-md-8">
                         <label for="inputPassword4" class="form-label">Maximum number of Classes will be held in a day</label>
                         <input type="number" name="max_class_day" value="{{old('max_class_day')}}" class="form-control" id="inputPassword4">
@@ -61,10 +58,6 @@
                         <div class="col-md-8">
                         <label for="inputPassword4" class="form-label">Maximum number of classes in One Subject per Week</label>
                         <input type="number" name="max_class_week" value="{{old('max_class_week')}}" class="form-control" id="inputPassword4">
-                    </div>
-                        <div class="col-md-8">
-                        <label for="inputPassword4" class="form-label">Break Time Starts</label>
-                        <input type="time" name="break_time_start" value="{{old('break_time_start')}}" class="form-control" id="inputPassword4">
                     </div>
                         <button type="submit" class="btn btn-primary btn-block">Save</button>
                     </form>
