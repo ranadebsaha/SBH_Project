@@ -59,8 +59,8 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#">
-              <span class="material-icons-outlined">phone</span> Support
+            <a href="{{url('/admin/view')}}">
+              <span class="material-icons-outlined">forum</span> Routine
             </a>
           </li>
           <li class="sidebar-list-item">

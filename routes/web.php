@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\mainController;
 use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\ViewController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\GuestMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -22,4 +23,6 @@ Route::get('/admin/routine',[RoutineController::class,'pre']);
 Route::post('/admin/routine/save',[RoutineController::class,'pre_save']);
 Route::get('/admin/routine/data',[RoutineController::class,'data']);
 Route::post('/admin/data',[RoutineController::class,'data_save']);
-Route::post('/admin/routine/view',[RoutineController::class,'routine_view_admin']);
+
+//View Routes
+Route::get('/admin/view',[ViewController::class,'routine']);

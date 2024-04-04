@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Details;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
 use Auth;
 use Hash;
 use Session;
