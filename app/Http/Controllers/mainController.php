@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Details;
+use App\Models\Routine;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -89,7 +90,14 @@ class mainController extends Controller
         $data = array();
         if (Session::has('id')) {
             $data=Admin::where('id', '=', Session::get('id'))->first();
-            return view("dashboard",compact('data'));
+            $data1=Routine::where('institute_id','=',Session::get('id'))->get();
+            // $data1=json_decode($data1);
+            if(empty($data1)){
+                return view("dashboard",compact('data'));
+            }else{
+                // $arr=array();
+                return view("dashboard",compact('data'),compact('data1'));
+            }
         }
         else{
             return redirect('login');

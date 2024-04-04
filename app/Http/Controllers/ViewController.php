@@ -9,7 +9,7 @@ class ViewController extends Controller
 {
     public function routine()
     {
-        return view('Routine/view');
+        return redirect('Routine/view');
         // if (Session::has('id')) {
         //     return view('Routine/view');
         // }
@@ -17,4 +17,5 @@ class ViewController extends Controller
         //     return redirect('login');
         // }
     }
+
 }

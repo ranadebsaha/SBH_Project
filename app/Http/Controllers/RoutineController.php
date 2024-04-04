@@ -290,7 +290,7 @@ class RoutineController extends Controller
                                             echo $data[$i - 1]['teacher_' . $i];
                                             echo $class_start;
                                             
-                                            $routine->save();
+                                            $res=$routine->save();
                                             //change time
                                             $class_start = strtotime($class_start) - strtotime('TODAY');
                                             $class_start = $class_start + $class_time;
@@ -302,11 +302,11 @@ class RoutineController extends Controller
                         }
                     }
                 }
-                if ($res) {
-                    return redirect('dashboard')->with('success', 'Routine Successfully Generated');
-                } else {
-                    return redirect('/admin/routine/data')->with('error', 'Something Error');
-                }
+            }
+            if ($res) {
+                return redirect('dashboard')->with('success', 'Routine Successfully Generated');
+            } else {
+                return redirect('/admin/routine/data')->with('error', 'Something Error');
             }
         }
         else{
