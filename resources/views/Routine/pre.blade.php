@@ -29,9 +29,9 @@
                         </div>
                         <div class="form-group">
                             <label for="register">No of Subject in Class/Depertment</label>
-                            <input type="number" name="class_no" value="{{old('class_start')}}" class="form-control" id="registerEmail" aria-describedby="emailHelp"
+                            <input type="number" name="subject_no" value="{{old('subject_no')}}" class="form-control" id="registerEmail" aria-describedby="emailHelp"
                                 placeholder="Class Starting Time">
-                                @error('class_no')
+                                @error('subject_no')
                         <span class="text-danger">
                             *{{ $message }}
                         </span>

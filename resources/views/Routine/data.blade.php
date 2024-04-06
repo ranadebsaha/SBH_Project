@@ -29,7 +29,7 @@
                     @endif
                     <i>Enter Subject name and its Corresponding teacher name</i>
                     @csrf
-                    @for($i=0;$i<Session::get('class_no');$i++)
+                    @for($i=0;$i<Session::get('subject_no');$i++)
 
                     <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Subject-{{$i+1}} Name</label>
